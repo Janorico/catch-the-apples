@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/CathTheApplesMusic.mp3-da3b2f94988391e95b8c3bd2ce50ff8c.mp3str"
+
+[deps]
+
+source_file="res://assets/sound/CathTheApplesMusic.mp3"
+dest_files=[ "res://.import/CathTheApplesMusic.mp3-da3b2f94988391e95b8c3bd2ce50ff8c.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

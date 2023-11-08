@@ -1,0 +1,26 @@
+"","en","de"
+"Catch the Apples","Catch the Apples","Aepfel fangen"
+"INITIAL_APPLE_SPEED","Initial apple speed: ","Anfangsgeschwindigkeit der Aepfel: "
+"TIME_DESC","How long do you need to catch ten apples?","Wie lange brauchen sie um zehn Aepfel zu fangen?"
+"COUNT_DESC","How much apples can you catch in one minute?","Wie viele Aepfel koennen sie in einer Minute fangen?"
+"ENDLESS_DESC","How much apples can you catch until you fail one?","Wie viele Aepfel koennen sie fangen befor sie einen verfehlen?"
+"CONGRATULATIONS","Congratulations!","Gratulation!"
+"CONGRATULATIONS_INFO_TIME","You needed {time_minutes} minutes and {time_seconds} seconds to catch 10 apples.","Sie haben {time_minutes} Minuten und {time_seconds} Sekunden gebraucht um 10 Aepfel zu fangen."
+"CONGRATULATIONS_INFO_COUNT","You catched {count} apples in one minute.","Sie haben {count} Aepfel in einer Minute gefangen."
+"CONGRATULATIONS_INFO_ENDLESS","You catched {count} apples in {time_minutes} minutes and {time_seconds} seconds.","Sie haben {count} Aepfel in {time_minutes} Minuten und {time_seconds} Sekunden gefangen."
+"OK","OK","OK"
+"About","About","Ueber"
+"ABOUT_TEXT","[b]Catch the Apples[/b]
+[i]is a game where you catch apples with a basket.[/i]
+
+Author: Janosch Lion
+Repository: [url]https://github.com/Janorico/catch-the-apples[/url]
+Website: [url]https://janorico.github.io[/url]
+Email: [url=mailto:janorico@posteo.de]janorico@posteo.de[/url]","[b]Aepfel fangen[/b]
+[i]ist ein Spiel in dem sie Aepfel mit einem Korb fangen muessen.[/i]
+
+Autor: Janosch Lion
+Repository: [url]https://github.com/Janorico/catch-the-apples[/url]
+Webseite: [url]https://janorico.github.io[/url]
+Email: [url=mailto:janorico@posteo.de]janorico@posteo.de[/url]"
+"CLOSE","Close","Schliessen"

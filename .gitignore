@@ -1,0 +1,4 @@
+# Godot 3-specific ignores
+.import/
+export_presets.cfg
+*.translation

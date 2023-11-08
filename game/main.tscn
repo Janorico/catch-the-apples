@@ -1,0 +1,446 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://assets/images/basket.png" type="Texture" id=1]
+[ext_resource path="res://assets/sound/CathTheApplesMusic.mp3" type="AudioStream" id=2]
+[ext_resource path="res://game/main.gd" type="Script" id=3]
+[ext_resource path="res://assets/images/icons8-count-96.png" type="Texture" id=4]
+[ext_resource path="res://assets/images/icons8-stopwatch-96.png" type="Texture" id=5]
+[ext_resource path="res://assets/images/icons8-exclamation-mark-96.png" type="Texture" id=6]
+[ext_resource path="res://assets/ubuntu_title.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://assets/images/music.svg" type="Texture" id=8]
+[ext_resource path="res://assets/images/sfx.png" type="Texture" id=9]
+[ext_resource path="res://game/settings.gd" type="Script" id=10]
+[ext_resource path="res://game/game.gd" type="Script" id=11]
+[ext_resource path="res://assets/logo/logo256.png" type="Texture" id=12]
+[ext_resource path="res://assets/images/button_pressed.png" type="Texture" id=13]
+[ext_resource path="res://assets/images/button_normal.png" type="Texture" id=14]
+[ext_resource path="res://assets/images/arrow_right.svg" type="Texture" id=15]
+[ext_resource path="res://assets/images/arrow_left.svg" type="Texture" id=16]
+[ext_resource path="res://assets/images/icons8-information-24.png" type="Texture" id=17]
+[ext_resource path="res://assets/sound/catched.mp3" type="AudioStream" id=18]
+[ext_resource path="res://assets/sound/failed.mp3" type="AudioStream" id=19]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 7 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "hide"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Settings/AboutButton:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "show"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Settings/AboutButton:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[node name="Main" type="Node"]
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 290.0 ]
+}
+
+[node name="Game" type="Node2D" parent="."]
+script = ExtResource( 11 )
+
+[node name="Progress" type="ProgressBar" parent="Game"]
+margin_left = 12.0
+margin_top = 12.0
+rect_min_size = Vector2( 200, 24 )
+max_value = 10.0
+step = 1.0
+percent_visible = false
+
+[node name="Label" type="Label" parent="Game/Progress"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "0"
+align = 1
+valign = 1
+
+[node name="Apples" type="Node2D" parent="Game"]
+
+[node name="Basket" type="Sprite" parent="Game"]
+position = Vector2( 515.5, 520 )
+texture = ExtResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="Game/Basket"]
+monitorable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Game/Basket/Area2D"]
+polygon = PoolVector2Array( -50, -16, 0, -22, 50, -16, 30, 60, -30, 60 )
+
+[node name="Left" type="TouchScreenButton" parent="Game"]
+modulate = Color( 0, 1, 0, 1 )
+position = Vector2( 12, 267.5 )
+normal = ExtResource( 14 )
+pressed = ExtResource( 13 )
+action = "move_left"
+
+[node name="Sprite" type="Sprite" parent="Game/Left"]
+texture = ExtResource( 16 )
+centered = false
+
+[node name="Right" type="TouchScreenButton" parent="Game"]
+modulate = Color( 0, 1, 0, 1 )
+position = Vector2( 974, 267.5 )
+normal = ExtResource( 14 )
+pressed = ExtResource( 13 )
+action = "move_right"
+
+[node name="Sprite" type="Sprite" parent="Game/Right"]
+texture = ExtResource( 15 )
+centered = false
+
+[node name="CatchedSFX" type="AudioStreamPlayer" parent="Game"]
+stream = ExtResource( 18 )
+bus = "SFX"
+
+[node name="FailedSFX" type="AudioStreamPlayer" parent="Game"]
+stream = ExtResource( 19 )
+bus = "SFX"
+
+[node name="CongratsDisplay" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.5 )
+
+[node name="CenterContainer" type="CenterContainer" parent="CongratsDisplay"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CongratsDisplay/CenterContainer"]
+margin_left = 387.0
+margin_top = 114.0
+margin_right = 643.0
+margin_bottom = 466.0
+
+[node name="TextureRect" type="TextureRect" parent="CongratsDisplay/CenterContainer/VBoxContainer"]
+margin_right = 256.0
+margin_bottom = 256.0
+texture = ExtResource( 12 )
+stretch_mode = 4
+
+[node name="CongratulationsLabel" type="Label" parent="CongratsDisplay/CenterContainer/VBoxContainer"]
+margin_top = 260.0
+margin_right = 256.0
+margin_bottom = 292.0
+custom_fonts/font = SubResource( 1 )
+text = "CONGRATULATIONS"
+align = 1
+
+[node name="InfoLabel" type="Label" parent="CongratsDisplay/CenterContainer/VBoxContainer"]
+margin_top = 296.0
+margin_right = 256.0
+margin_bottom = 312.0
+align = 1
+
+[node name="OKButton" type="Button" parent="CongratsDisplay/CenterContainer/VBoxContainer"]
+margin_left = 110.0
+margin_top = 316.0
+margin_right = 145.0
+margin_bottom = 352.0
+size_flags_horizontal = 4
+text = "OK"
+
+[node name="MainMenu" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.5 )
+
+[node name="CenterContainer" type="CenterContainer" parent="MainMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/CenterContainer"]
+margin_left = 337.0
+margin_top = 189.0
+margin_right = 693.0
+margin_bottom = 391.0
+
+[node name="Label" type="Label" parent="MainMenu/CenterContainer/VBoxContainer"]
+margin_right = 356.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 1 )
+text = "Catch the Apples"
+align = 1
+
+[node name="InitialAppleSpeed" type="HBoxContainer" parent="MainMenu/CenterContainer/VBoxContainer"]
+margin_top = 36.0
+margin_right = 356.0
+margin_bottom = 62.0
+alignment = 1
+
+[node name="Label" type="Label" parent="MainMenu/CenterContainer/VBoxContainer/InitialAppleSpeed"]
+margin_left = 69.0
+margin_top = 5.0
+margin_right = 196.0
+margin_bottom = 21.0
+text = "INITIAL_APPLE_SPEED"
+
+[node name="SpinBox" type="SpinBox" parent="MainMenu/CenterContainer/VBoxContainer/InitialAppleSpeed"]
+margin_left = 200.0
+margin_right = 286.0
+margin_bottom = 26.0
+max_value = 500.0
+suffix = "px/s"
+
+[node name="GridContainer" type="GridContainer" parent="MainMenu/CenterContainer/VBoxContainer"]
+margin_top = 66.0
+margin_right = 356.0
+margin_bottom = 202.0
+columns = 3
+
+[node name="TimeButton" type="Button" parent="MainMenu/CenterContainer/VBoxContainer/GridContainer"]
+margin_right = 116.0
+margin_bottom = 116.0
+icon = ExtResource( 5 )
+
+[node name="CountButton" type="Button" parent="MainMenu/CenterContainer/VBoxContainer/GridContainer"]
+margin_left = 120.0
+margin_right = 236.0
+margin_bottom = 116.0
+icon = ExtResource( 4 )
+
+[node name="EndlessButton" type="Button" parent="MainMenu/CenterContainer/VBoxContainer/GridContainer"]
+margin_left = 240.0
+margin_right = 356.0
+margin_bottom = 116.0
+icon = ExtResource( 6 )
+
+[node name="TimeLabel" type="Label" parent="MainMenu/CenterContainer/VBoxContainer/GridContainer"]
+margin_top = 120.0
+margin_right = 116.0
+margin_bottom = 136.0
+size_flags_vertical = 5
+text = "TIME_DESC"
+autowrap = true
+
+[node name="CountLabel" type="Label" parent="MainMenu/CenterContainer/VBoxContainer/GridContainer"]
+margin_left = 120.0
+margin_top = 120.0
+margin_right = 236.0
+margin_bottom = 136.0
+size_flags_vertical = 5
+text = "COUNT_DESC"
+autowrap = true
+
+[node name="EndlessLabel" type="Label" parent="MainMenu/CenterContainer/VBoxContainer/GridContainer"]
+margin_left = 240.0
+margin_top = 120.0
+margin_right = 356.0
+margin_bottom = 136.0
+size_flags_vertical = 5
+text = "ENDLESS_DESC"
+autowrap = true
+
+[node name="AboutDialog" type="CenterContainer" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Container" type="VBoxContainer" parent="AboutDialog"]
+margin_left = 252.0
+margin_top = 101.0
+margin_right = 779.0
+margin_bottom = 479.0
+
+[node name="TabContainer" type="TabContainer" parent="AboutDialog/Container"]
+margin_right = 527.0
+margin_bottom = 338.0
+use_hidden_tabs_for_min_size = true
+
+[node name="About" type="RichTextLabel" parent="AboutDialog/Container/TabContainer"]
+modulate = Color( 0, 0, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 46.0
+margin_right = -10.0
+margin_bottom = -10.0
+bbcode_enabled = true
+
+[node name="Sources" type="RichTextLabel" parent="AboutDialog/Container/TabContainer"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 46.0
+margin_right = -10.0
+margin_bottom = -10.0
+bbcode_enabled = true
+bbcode_text = "[b]Sources[/b]
+
+* [url=https://www.1001freefonts.com/ubuntu-title.font]Ubuntu Title[/url] font by [url=https://www.1001freefonts.com]1001 Free Fonts[/url]
+* [url=https://iconduck.com/icons/22571/volume-up]Volume Up[/url] icon by [url=https://iconduck.com]Iconduck[/url]
+* [url=https://iconduck.com/icons/2202/music]music[/url] icon by [url=https://iconduck.com]Iconduck[/url]
+* [url=https://icons8.com/icon/5Kx87yiyxQx1/info]Info[/url] icon by [url=https://icons8.com]Icons8[/url]
+* [url=https://icons8.com/icon/R1Gh4Km8qVwg/stopwatch]Stopwatch[/url] icon by [url=https://icons8.com]Icons8[/url]
+* [url=https://icons8.com/icon/x4gpm1ZbJ8Xe/counter]Counter[/url] icon by [url=https://icons8.com]Icons8[/url]
+* [url=https://icons8.com/icon/nEQNNlRvhp2G/exclamation-mark]Exclamation Mark[/url] icon by [url=https://icons8.com]Icons8[/url]
+"
+text = "Sources
+
+* Ubuntu Title font by 1001 Free Fonts
+* Volume Up icon by Iconduck
+* music icon by Iconduck
+* Info icon by Icons8
+* Stopwatch icon by Icons8
+* Counter icon by Icons8
+* Exclamation Mark icon by Icons8
+"
+
+[node name="Copyright" type="Label" parent="AboutDialog/Container/TabContainer"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 46.0
+margin_right = -10.0
+margin_bottom = -10.0
+text = "Catch the Apples is a game where you catch apples with a basket.
+Copyright (C) 2023 Janosch Lion
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>."
+
+[node name="CloseButton" type="Button" parent="AboutDialog/Container"]
+margin_top = 342.0
+margin_right = 527.0
+margin_bottom = 378.0
+text = "CLOSE"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AboutDialog"]
+anims/hide = SubResource( 2 )
+anims/show = SubResource( 3 )
+
+[node name="Settings" type="HBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_bottom = -12.0
+grow_vertical = 0
+script = ExtResource( 10 )
+
+[node name="MusicButton" type="Button" parent="Settings"]
+margin_right = 44.0
+margin_bottom = 44.0
+icon = ExtResource( 8 )
+
+[node name="SFXButton" type="Button" parent="Settings"]
+margin_left = 48.0
+margin_right = 92.0
+margin_bottom = 44.0
+icon = ExtResource( 9 )
+
+[node name="AboutButton" type="Button" parent="Settings"]
+margin_left = 96.0
+margin_right = 140.0
+margin_bottom = 44.0
+icon = ExtResource( 17 )
+
+[node name="SaveTimer" type="Timer" parent="Settings"]
+process_mode = 0
+one_shot = true
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+bus = "Music"
+
+[connection signal="area_entered" from="Game/Basket/Area2D" to="Game" method="_on_apple_catched"]
+[connection signal="pressed" from="CongratsDisplay/CenterContainer/VBoxContainer/OKButton" to="CongratsDisplay" method="hide"]
+[connection signal="pressed" from="CongratsDisplay/CenterContainer/VBoxContainer/OKButton" to="MainMenu" method="show"]
+[connection signal="value_changed" from="MainMenu/CenterContainer/VBoxContainer/InitialAppleSpeed/SpinBox" to="Settings" method="_start_timer"]
+[connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer/GridContainer/TimeButton" to="." method="_on_time_mode_choosed"]
+[connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer/GridContainer/CountButton" to="." method="_on_count_mode_choosed"]
+[connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer/GridContainer/EndlessButton" to="." method="_on_endless_mode_choosed"]
+[connection signal="meta_clicked" from="AboutDialog/Container/TabContainer/About" to="." method="_on_rich_text_meta_clicked"]
+[connection signal="meta_clicked" from="AboutDialog/Container/TabContainer/Sources" to="." method="_on_rich_text_meta_clicked"]
+[connection signal="pressed" from="AboutDialog/Container/CloseButton" to="AboutDialog/AnimationPlayer" method="play" binds= [ "hide" ]]
+[connection signal="pressed" from="Settings/MusicButton" to="Settings" method="_on_music_button_pressed"]
+[connection signal="pressed" from="Settings/SFXButton" to="Settings" method="_on_sfx_button_pressed"]
+[connection signal="pressed" from="Settings/AboutButton" to="AboutDialog/AnimationPlayer" method="play" binds= [ "show" ]]
+[connection signal="timeout" from="Settings/SaveTimer" to="Settings" method="save_config"]
